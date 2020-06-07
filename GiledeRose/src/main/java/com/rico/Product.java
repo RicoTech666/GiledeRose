@@ -1,18 +1,26 @@
-public class Product {
+package com.rico;
 
-    private final int initSellIn;
+class Product {
+
+
     private int sellIn;
     private double quality;
 
-    public Product(int initSellIn, int sellIn, double quality) {
-
-        this.initSellIn = initSellIn;
+    public Product(int sellIn, double quality) {
         this.sellIn = sellIn;
         this.quality = quality;
     }
 
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    public double getQuality() {
+        return quality;
+    }
+
     public void qualityChangeByDay(int dayCount) {
-        if( dayCount <= this.sellIn ) {
+        if (dayCount <= this.sellIn) {
             updateQualityAndSellInBeforeExpire(dayCount);
         } else {
             updateQualityAndSellInAfterExpire(dayCount);
@@ -26,9 +34,9 @@ public class Product {
     }
 
     private void updateQualityAndSellInAfterExpire(int dayCount) {
-        if( this.sellIn > 0) {
-            updateQualityAndSellInBeforeExpire(this.sellIn);
+        if (this.sellIn > 0) {
             dayCount -= this.sellIn;
+            updateQualityAndSellInBeforeExpire(this.sellIn);
         }
         double estimatedQuality = this.quality - dayCount * 2;
         this.quality = estimatedQuality >= 0 ? estimatedQuality : 0;
