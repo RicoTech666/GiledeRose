@@ -2,9 +2,8 @@ package com.rico;
 
 class Product {
 
-
-    private int sellIn;
-    private double quality;
+    protected int sellIn;
+    protected double quality;
 
     public Product(int sellIn, double quality) {
         this.sellIn = sellIn;
@@ -27,13 +26,13 @@ class Product {
         }
     }
 
-    private void updateQualityAndSellInBeforeExpire(int dayCount) {
+    void updateQualityAndSellInBeforeExpire(int dayCount) {
         double estimatedQuality = this.quality - dayCount;
         this.quality = estimatedQuality >= 0 ? estimatedQuality : 0;
         this.sellIn -= dayCount;
     }
 
-    private void updateQualityAndSellInAfterExpire(int dayCount) {
+    void updateQualityAndSellInAfterExpire(int dayCount) {
         if (this.sellIn > 0) {
             dayCount -= this.sellIn;
             updateQualityAndSellInBeforeExpire(this.sellIn);
